@@ -36,7 +36,8 @@ module Ruboty
 
           cmd = "cd #{path} && bundle && bundle exec cap #{@env} deploy BRANCH=#{@branch}"
           out, err, status = Bundler.with_clean_env { Open3.capture3(cmd) }
-          message.reply(path, out[0..100], env)
+          tmp = "path: #{path}, out: #{out[0..100]}, env: #{env}"
+          message.reply(tmp)
           raise DeployError.new(err) unless err.empty?
         end
       end
